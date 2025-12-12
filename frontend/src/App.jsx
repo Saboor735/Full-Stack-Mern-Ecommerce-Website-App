@@ -13,11 +13,22 @@ import Navbar from "./components/Navbar"
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 
-import Verify from './pages/Verify'
+import Verify from './pages/Verify';
 import 'react-toastify/dist/ReactToastify.css';
-  import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname === '/admin') {
+      window.location.href = 'http://localhost:3001'; // Update this URL if your admin panel runs on a different port
+      return null;
+    }
+  }, []);
+
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>  
     <Navbar/>     
@@ -33,7 +44,8 @@ const App = () => {
 <Route path='/orders' element={<Orders/>}/>
 <Route path='/place-order' element={<Placeorder/>}/>
 <Route path='/product/:productId' element={<Product/>}/>
-<Route path='/verify' element={<Verify/>}/>
+<Route path='/verify' element={<Verify/>} />
+<Route path='/admin' element={null} />
     </Routes>
     <Footer/>
     
